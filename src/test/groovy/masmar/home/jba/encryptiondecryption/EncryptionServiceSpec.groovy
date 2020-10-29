@@ -7,4 +7,9 @@ class EncryptionServiceSpec extends Specification {
         expect:
         new EncryptionService().reverseOrderEncryption("test me") == "gvhg nv"
     }
+
+    def "should encrypt message with key usage"() {
+        expect:
+        new EncryptionService().keyEncryption("welcome to hyperskill", 5) == "bjqhtrj yt mdujwxpnqq"
+    }
 }
