@@ -1,0 +1,9 @@
+-alg unicode -mode enc -key 5 -in "src/main/resources/road_to_treasure.txt" -out "src/main/resources/output.txt"
+
+-mode enc -key 5 -data "Welcome to hyperskill!" -alg unicode
+
+-key 5 -alg unicode -data "\jqhtrj%yt%m~ujwxpnqq&" -mode dec
+
+-key 5 -alg shift -data "Welcome to hyperskill!" -mode enc
+
+-key 5 -alg shift -data "Bjqhtrj yt mdujwxpnqq!" -mode dec

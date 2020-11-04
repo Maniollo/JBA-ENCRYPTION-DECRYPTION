@@ -9,12 +9,12 @@ import java.util.Objects;
 
 class Main {
     public static void main(String[] args) {
-        EncryptionService encryptionService = new EncryptionService();
         String mode = "enc";
         int key = 0;
         String data = "";
         String in = null;
         String out = null;
+        String alg = "shift";
 
         for (int i = 0; i < args.length; i++) {
             if (args[i].equals("-mode")) {
@@ -41,6 +41,11 @@ class Main {
                 continue;
             }
 
+            if (args[i].equals("-alg")) {
+                alg = args[i++ + 1];
+                continue;
+            }
+
             if (args[i].equals("-data")) {
                 data = args[i++ + 1];
             }
@@ -50,16 +55,19 @@ class Main {
             data = in;
         }
 
-        String result = "";
         switch (mode) {
             case "enc":
-                result = encryptionService.keyEncryption(data, key);
+                Encrypter encrypter = new EncrypterFactory().createEncrypter(alg);
+                exportResult(out, encrypter.encrypt(data, key));
                 break;
             case "dec":
-                result = encryptionService.keyDecryption(data, key);
+                Decrypter decrypter = new DecrypterFactory().createDecrypter(alg);
+                exportResult(out, decrypter.decrypt(data, key));
                 break;
         }
+    }
 
+    private static void exportResult(String out, String result) {
         if (Objects.isNull(out)) {
             System.out.println(result);
         } else {
